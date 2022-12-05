@@ -1,0 +1,62 @@
+server:
+  ## 服务运行端口配置
+  port: 8005
+spring:
+  application:
+    name: voice-room-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        enabled: true
+    consul:
+      enabled: false
+      discovery:
+        heartbeat:
+          enabled: true
+        health-check-path: /management/health
+        health-check-interval: 5s
+      host: localhost
+      port: 8500
+    gateway:
+      routes:
+        - id: voice_room
+          uri: lb://voice-room
+          predicates:
+            - Path=/voice/**
+          order: 10
+        - id: voice_user
+          uri: lb://voice-room
+          predicates:
+            - Path=/user/login/device
+        - id: voice_health
+          uri: lb://voice-room
+          predicates:
+            - Path=/voice/management/health
+          filters:
+            - StripPrefix=1
+          order: 1
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+jwt:
+  token:
+    secret: custom_secret
+    exp-time: 3
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: "/management"

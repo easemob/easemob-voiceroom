@@ -41,6 +41,11 @@ public class VoiceRoomGiftController {
     @Value("${ranking.length:100}")
     private Integer rankingLength;
 
+    /**
+     * 获取房间礼物排行榜
+     * @param roomId
+     * @return
+     */
     @GetMapping("/voice/room/{roomId}/gift/list")
     public GetGiftListResponse listGift(@PathVariable("roomId") String roomId) {
         VoiceRoom voiceRoom = voiceRoomService.findByRoomId(roomId);
@@ -63,6 +68,14 @@ public class VoiceRoomGiftController {
         return new GetGiftListResponse(list, giftAmount);
     }
 
+    /**
+     * 送礼物
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/gift/add")
     public AddGiftResponse addGift(@PathVariable("roomId") String roomId,
             @RequestBody @Validated AddGiftRequest request, BindingResult bindingResult,

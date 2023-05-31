@@ -1,5 +1,21 @@
 # Voice Room Service
 
+## 项目结构
+
+### common 对环信im服务的封装
+
+#### im im主要是对环信服务端api的封装集成
+##### ImApi中封装了环信服务端api的调用方法 [ImApi.java](voiceRoom%2Fsrc%2Fmain%2Fjava%2Fcom%2Fvoiceroom%2Fcommon%2Fim%2FImApi.java)
+
+### mic 语聊房间服务
+
+#### controller 控制器
+##### 用户控制器 [UserController.java](voiceRoom%2Fsrc%2Fmain%2Fjava%2Fcom%2Fvoiceroom%2Fmic%2Fcontroller%2FUserController.java)
+##### 语聊房间控制器 [VoiceRoomController.java](voiceRoom%2Fsrc%2Fmain%2Fjava%2Fcom%2Fvoiceroom%2Fmic%2Fcontroller%2FVoiceRoomController.java)
+##### 语聊房间礼物控制器 [VoiceRoomGiftController.java](voiceRoom%2Fsrc%2Fmain%2Fjava%2Fcom%2Fvoiceroom%2Fmic%2Fcontroller%2FVoiceRoomGiftController.java)
+##### 语聊房间麦位控制器 [VoiceRoomMicController.java](voiceRoom%2Fsrc%2Fmain%2Fjava%2Fcom%2Fvoiceroom%2Fmic%2Fcontroller%2FVoiceRoomMicController.java)
+##### 语聊房房间用户控制器 [VoiceRoomUserController.java](voiceRoom%2Fsrc%2Fmain%2Fjava%2Fcom%2Fvoiceroom%2Fmic%2Fcontroller%2FVoiceRoomUserController.java)
+
 ## 项目配置
 
 请参考`resources/application.properties`，另外开发环境和线上部署环境的差异化配置请参考`resources/application-dev.properties`和`resources/application-prod.properties`

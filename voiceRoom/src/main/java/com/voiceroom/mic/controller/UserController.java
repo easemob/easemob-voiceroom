@@ -40,6 +40,12 @@ public class UserController {
     @Value("${voice.room.login.auth.phone:false}")
     private Boolean isAuthPhone;
 
+    /**
+     * 设备登录
+     * @param request
+     * @param result
+     * @return
+     */
     @PostMapping(value = "/login/device")
     public LoginResponse loginDevice(@RequestBody @Validated LoginRequest request,
             BindingResult result) {
@@ -67,6 +73,11 @@ public class UserController {
                 userDTO.getChatUid(), jwtToken, imToken, userDTO.getRtcUid());
     }
 
+    /**
+     * 发送短信验证码
+     * @param sendSmsRequest
+     * @return
+     */
     @PostMapping("/sms/send")
     public SendSmsResponse sendSms(@RequestBody @Valid SendSmsRequest sendSmsRequest) {
         String phoneNumber = sendSmsRequest.getPhoneNumber();
@@ -80,6 +91,12 @@ public class UserController {
         return new SendSmsResponse(true);
     }
 
+    /**
+     * token 刷新
+     * @param request
+     * @param result
+     * @return
+     */
     @PostMapping("/token/refresh")
     public LoginResponse refreshToken(@RequestBody @Validated RefreshTokenRequest request,
             BindingResult result) {

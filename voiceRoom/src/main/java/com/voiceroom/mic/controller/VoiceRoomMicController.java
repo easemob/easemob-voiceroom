@@ -37,6 +37,14 @@ public class VoiceRoomMicController {
     @Resource
     private VoiceRoomUserService voiceRoomUserService;
 
+    /**
+     * 获取麦位申请列表
+     * @param user
+     * @param roomId
+     * @param cursor
+     * @param limit
+     * @return
+     */
     @GetMapping("/voice/room/{roomId}/mic/apply")
     public GetMicApplyListResponse getMicApplyList(
             @RequestAttribute(name = "user", required = false) UserDTO user,
@@ -52,6 +60,14 @@ public class VoiceRoomMicController {
                 pageInfo.getList());
     }
 
+    /**
+     * 新增麦位申请
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/apply")
     public AddMicApplyResponse addMicApply(@PathVariable("roomId") String roomId,
             @RequestBody(required = false) @Validated AddMicApplyRequest request,
@@ -71,6 +87,12 @@ public class VoiceRoomMicController {
         return new AddMicApplyResponse(result);
     }
 
+    /**
+     * 取消麦位申请
+     * @param roomId
+     * @param user
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}/mic/apply")
     public DeleteMicApplyResponse deleteMicApply(@PathVariable("roomId") String roomId,
             @RequestAttribute(name = "user", required = false) UserDTO user) {
@@ -82,6 +104,12 @@ public class VoiceRoomMicController {
         return new DeleteMicApplyResponse(Boolean.TRUE);
     }
 
+    /**
+     * 获取房间麦位信息
+     * @param user
+     * @param roomId
+     * @return
+     */
     @GetMapping("/voice/room/{roomId}/mic")
     public List<MicInfo> getRoomMicInfo(
             @RequestAttribute(name = "user", required = false) UserDTO user,
@@ -90,6 +118,14 @@ public class VoiceRoomMicController {
         return voiceRoomMicService.getRoomMicInfo(roomInfo);
     }
 
+    /**
+     * 闭麦
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/close")
     public CloseMicResponse closeMic(@PathVariable("roomId") String roomId,
             @RequestBody @Validated CloseMicRequest request, BindingResult bindingResult,
@@ -104,6 +140,13 @@ public class VoiceRoomMicController {
         return new CloseMicResponse(Boolean.TRUE);
     }
 
+    /**
+     * 打开麦
+     * @param roomId
+     * @param micIndex
+     * @param user
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}/mic/close")
     public OpenMicResponse openMic(@PathVariable("roomId") String roomId,
             @RequestParam("mic_index") Integer micIndex,
@@ -117,6 +160,13 @@ public class VoiceRoomMicController {
         return new OpenMicResponse(Boolean.TRUE);
     }
 
+    /**
+     * 下麦
+     * @param roomId
+     * @param micIndex
+     * @param user
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}/mic/leave")
     public LeaveMicResponse leaveMic(@PathVariable("roomId") String roomId,
             @RequestParam("mic_index") Integer micIndex,
@@ -130,6 +180,14 @@ public class VoiceRoomMicController {
         return new LeaveMicResponse(Boolean.TRUE);
     }
 
+    /**
+     * 禁麦
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/mute")
     public MuteMicResponse muteMic(@PathVariable("roomId") String roomId,
             @RequestBody @Validated MuteMicRequest request, BindingResult bindingResult,
@@ -149,6 +207,13 @@ public class VoiceRoomMicController {
         return response;
     }
 
+    /**
+     * 取消禁麦
+     * @param roomId
+     * @param micIndex
+     * @param user
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}/mic/mute")
     public UnMuteMicResponse unMuteMic(@PathVariable("roomId") String roomId,
             @RequestParam("mic_index") Integer micIndex,
@@ -167,6 +232,14 @@ public class VoiceRoomMicController {
         return response;
     }
 
+    /**
+     * 交换麦位
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/exchange")
     public ExchangeMicResponse exchangeMic(@PathVariable("roomId") String roomId,
             @RequestBody @Validated ExchangeMicRequest request, BindingResult bindingResult,
@@ -182,6 +255,14 @@ public class VoiceRoomMicController {
         return response;
     }
 
+    /**
+     * 踢用户下麦
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/kick")
     public KickUserMicResponse kickUserMic(
             @PathVariable("roomId") String roomId,
@@ -201,6 +282,14 @@ public class VoiceRoomMicController {
         return response;
     }
 
+    /**
+     * 锁麦
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/lock")
     public LockMicResponse lockMic(@PathVariable("roomId") String roomId,
             @RequestBody @Validated LockMicRequest request, BindingResult bindingResult,
@@ -219,6 +308,13 @@ public class VoiceRoomMicController {
         return response;
     }
 
+    /**
+     * 解锁麦
+     * @param roomId
+     * @param micIndex
+     * @param user
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}/mic/lock")
     public UnLockMicResponse unLockMic(@PathVariable("roomId") String roomId,
             @RequestParam("mic_index") Integer micIndex,
@@ -239,6 +335,14 @@ public class VoiceRoomMicController {
         return response;
     }
 
+    /**
+     * 邀请上麦
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/invite")
     public InviteUserOnMicResponse invite(@PathVariable("roomId") String roomId,
             @RequestBody @Validated InviteUserOnMicRequest request, BindingResult bindingResult,
@@ -260,6 +364,14 @@ public class VoiceRoomMicController {
         return response;
     }
 
+    /**
+     * 房主同意上麦申请
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/apply/agree")
     public ApplyAgreeOnMicResponse agreeApply(
             @PathVariable("roomId") String roomId,
@@ -281,6 +393,14 @@ public class VoiceRoomMicController {
         return new ApplyAgreeOnMicResponse(Boolean.TRUE.equals(result));
     }
 
+    /**
+     * 拒绝上麦邀请
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/apply/refuse")
     public ApplyAgreeOnMicResponse refuseApply(
             @PathVariable("roomId") String roomId,
@@ -302,6 +422,14 @@ public class VoiceRoomMicController {
         return new ApplyAgreeOnMicResponse(Boolean.TRUE.equals(result));
     }
 
+    /**
+     * 同意邀请上麦
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/mic/invite/agree")
     public InviteAgreeOnMicResponse agreeInvite(
             @PathVariable("roomId") String roomId,
@@ -321,6 +449,12 @@ public class VoiceRoomMicController {
         return new InviteAgreeOnMicResponse(Boolean.TRUE.equals(result));
     }
 
+    /**
+     * 拒绝上麦邀请
+     * @param roomId
+     * @param user
+     * @return
+     */
     @GetMapping("/voice/room/{roomId}/mic/invite/refuse")
     public InviteAgreeOnMicResponse refuseInvite(
             @PathVariable("roomId") String roomId,

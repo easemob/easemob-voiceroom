@@ -17,6 +17,13 @@ public class VoiceRoomUserController {
     @Resource
     private VoiceRoomUserService voiceRoomUserService;
 
+    /**
+     * 获取房间成员列表
+     * @param roomId
+     * @param cursor
+     * @param limit
+     * @return
+     */
     @GetMapping("/voice/room/{roomId}/members/list")
     public GetRoomUserListResponse getRoomMemberList(@PathVariable("roomId") String roomId,
             @RequestParam(name = "cursor", required = false) String cursor,
@@ -33,6 +40,12 @@ public class VoiceRoomUserController {
                 pageInfo.getList());
     }
 
+    /**
+     * 加入房间
+     * @param roomId
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/members/join")
     public JoinRoomResponse joinRoom(@PathVariable("roomId") String roomId,
             @RequestAttribute(name = "user", required = false) UserDTO user) {
@@ -43,6 +56,13 @@ public class VoiceRoomUserController {
         return new JoinRoomResponse(Boolean.TRUE);
     }
 
+    /**
+     * 离开房间
+     * @param roomId
+     * @param user
+     * @param isSuccess
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}/members/leave")
     public LeaveRoomResponse leaveRoom(@PathVariable("roomId") String roomId,
             @RequestAttribute(name = "user", required = false) UserDTO user,
@@ -54,6 +74,13 @@ public class VoiceRoomUserController {
         return new LeaveRoomResponse(Boolean.TRUE);
     }
 
+    /**
+     * 踢出房间
+     * @param roomId
+     * @param uid
+     * @param user
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}/members/kick")
     public KickRoomResponse kickRoom(@PathVariable("roomId") String roomId,
             @RequestParam("uid") String uid,

@@ -55,6 +55,13 @@ public class VoiceRoomController {
     @Resource
     private TokenProvider tokenProvider;
 
+    /**
+     * 创建房间
+     * @param request
+     * @param result
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/create")
     public CreateRoomResponse createVoiceRoom(
             @RequestBody @Validated CreateRoomRequest request, BindingResult result,
@@ -83,6 +90,13 @@ public class VoiceRoomController {
         return new CreateRoomResponse(roomDTO, micInfos);
     }
 
+    /**
+     * 获取房间列表
+     * @param cursor
+     * @param limit
+     * @param type
+     * @return
+     */
     @GetMapping("/voice/room/list")
     public GetRoomListResponse getRoomList(
             @RequestParam(name = "cursor", required = false) String cursor,
@@ -96,6 +110,13 @@ public class VoiceRoomController {
                 pageInfo.getList());
     }
 
+    /**
+     * 获取房间 RTC token
+     * @param roomId
+     * @param channelId
+     * @param user
+     * @return
+     */
     @GetMapping("/voice/room/{roomId}/rtc/token")
     public GetVoiceRoomRtcTokenResponse getVoiceRoomRtcToken(
             @PathVariable("roomId") String roomId,
@@ -113,6 +134,12 @@ public class VoiceRoomController {
         return new GetVoiceRoomRtcTokenResponse(token);
     }
 
+    /**
+     * 获取房间信息
+     * @param roomId
+     * @param user
+     * @return
+     */
     @GetMapping("/voice/room/{roomId}")
     public GetVoiceRoomResponse getVoiceRoomInfo(@PathVariable("roomId") String roomId,
             @RequestAttribute(name = "user", required = false) UserDTO user) {
@@ -146,6 +173,13 @@ public class VoiceRoomController {
         return new GetVoiceRoomResponse(voiceRoomDTO, micInfo);
     }
 
+    /**
+     * 更新房间信息
+     * @param roomId
+     * @param request
+     * @param user
+     * @return
+     */
     @PutMapping("/voice/room/{roomId}")
     public UpdateRoomInfoResponse updateVoiceRoomInfo(@PathVariable("roomId") String roomId,
             @RequestBody UpdateRoomInfoRequest request,
@@ -157,6 +191,12 @@ public class VoiceRoomController {
         return new UpdateRoomInfoResponse(Boolean.TRUE);
     }
 
+    /**
+     * 删除房间
+     * @param roomId
+     * @param user
+     * @return
+     */
     @DeleteMapping("/voice/room/{roomId}")
     public DeleteRoomResponse deleteVoiceRoom(@PathVariable("roomId") String roomId,
             @RequestAttribute(name = "user", required = false) UserDTO user) {
@@ -167,6 +207,14 @@ public class VoiceRoomController {
         return new DeleteRoomResponse(Boolean.TRUE);
     }
 
+    /**
+     * 校验进入房间密码
+     * @param roomId
+     * @param request
+     * @param bindingResult
+     * @param user
+     * @return
+     */
     @PostMapping("/voice/room/{roomId}/validPassword")
     public ValidateRoomPasswordResponse validPassword(@PathVariable("roomId") String roomId,
             @RequestBody(required = true) ValidateRoomPasswordRequest request,BindingResult bindingResult,
